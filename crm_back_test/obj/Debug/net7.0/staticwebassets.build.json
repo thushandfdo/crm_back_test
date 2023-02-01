@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "EgPPZMzN9OxtdHUI6L/vZ0lxp8eth0rO8GjeW+AEBqg=",
+  "Source": "crm_back_test",
+  "BasePath": "_content/crm_back_test",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
