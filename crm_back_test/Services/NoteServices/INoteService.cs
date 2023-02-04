@@ -1,7 +1,7 @@
 ﻿using crm_back_test.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace crm_back_test.Services
+namespace crm_back_test.Services.NoteServices
 {
     public interface INoteService
     {

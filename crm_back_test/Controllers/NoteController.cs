@@ -1,8 +1,8 @@
 ﻿using crm_back_test.Data;
 using crm_back_test.Models;
-using crm_back_test.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using crm_back_test.Services.NoteServices;
 
 namespace crm_back_test.Controllers
 {

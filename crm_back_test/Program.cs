@@ -1,5 +1,6 @@
 using crm_back_test.Data;
-using crm_back_test.Services;
+using crm_back_test.Services.CustomerServices;
+using crm_back_test.Services.NoteServices;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 );
 
 builder.Services.AddScoped<INoteService, NoteService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 var app = builder.Build();
 

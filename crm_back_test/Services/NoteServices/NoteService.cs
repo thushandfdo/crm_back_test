@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
-namespace crm_back_test.Services
+namespace crm_back_test.Services.NoteServices
 {
     public class NoteService : INoteService
     {
         private readonly DataContext _context;
 
-        public NoteService(DataContext context) {
+        public NoteService(DataContext context)
+        {
             _context = context;
         }
 
@@ -30,9 +31,9 @@ namespace crm_back_test.Services
 
         public async Task<List<Note>?> postNote(Note newNote)
         {
-            var note = await _context.Notes.Where(note => note.Title.Equals(newNote.Title)).ToListAsync();
+            var note = await _context.Notes.Where(note => note.Title.Equals(newNote.Title)).FirstOrDefaultAsync();
 
-            if(!note.IsNullOrEmpty())
+            if (note != null)
             {
                 return null;
             }
