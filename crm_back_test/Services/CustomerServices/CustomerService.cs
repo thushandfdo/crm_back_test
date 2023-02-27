@@ -42,19 +42,16 @@ namespace crm_back_test.Services.CustomerServices
             return await _context.Customers.ToListAsync();
         }
 
-        public async Task<List<Customer>?> putCustomer(Customer newCustomer)
+        public async Task<List<Customer>?> putCustomer(int customerId, Customer newCustomer)
         {
-            var customer = await _context.Customers.FindAsync(newCustomer.Id);
+            var customer = await _context.Customers.FindAsync(customerId);
 
             if (customer == null)
             {
                 return null;
             }
 
-            customer.Company = newCustomer.Company;
-            customer.ContactPerson = newCustomer.ContactPerson;
-            customer.ContactNo = newCustomer.ContactNo;
-            customer.Email = newCustomer.Email;
+            customer.Company = (newCustomer.Company == "") ? customer.Company : newCustomer.Company;
 
             await _context.SaveChangesAsync();
 

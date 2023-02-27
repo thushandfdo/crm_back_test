@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crm_back_test", "crm_back_test\crm_back_test.csproj", "{298455D7-8C4A-4FBE-ABD7-6A04ECE55AAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "crm_back_test", "crm_back_test\crm_back_test.csproj", "{298455D7-8C4A-4FBE-ABD7-6A04ECE55AAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailService", "EmailService\EmailService.csproj", "{6352EC57-CD20-4485-BE0B-80527EE198A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{298455D7-8C4A-4FBE-ABD7-6A04ECE55AAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{298455D7-8C4A-4FBE-ABD7-6A04ECE55AAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{298455D7-8C4A-4FBE-ABD7-6A04ECE55AAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6352EC57-CD20-4485-BE0B-80527EE198A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6352EC57-CD20-4485-BE0B-80527EE198A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6352EC57-CD20-4485-BE0B-80527EE198A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6352EC57-CD20-4485-BE0B-80527EE198A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

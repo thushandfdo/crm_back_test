@@ -56,9 +56,9 @@ namespace crm_back_test.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<List<Customer>?>> putCustomer(Customer newCustomer)
+        public async Task<ActionResult<List<Customer>?>> putCustomer(int customerId, Customer newCustomer)
         {
-            var customers = await _customerService.putCustomer(newCustomer);
+            var customers = await _customerService.putCustomer(customerId, newCustomer);
 
             if (customers == null)
             {

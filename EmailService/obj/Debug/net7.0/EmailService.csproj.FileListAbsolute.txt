@@ -1,0 +1,12 @@
+C:\dotnet\crm_back_test\EmailService\bin\Debug\net7.0\EmailService.deps.json
+C:\dotnet\crm_back_test\EmailService\bin\Debug\net7.0\EmailService.dll
+C:\dotnet\crm_back_test\EmailService\bin\Debug\net7.0\EmailService.pdb
+C:\dotnet\crm_back_test\EmailService\obj\Debug\net7.0\EmailService.csproj.AssemblyReference.cache
+C:\dotnet\crm_back_test\EmailService\obj\Debug\net7.0\EmailService.GeneratedMSBuildEditorConfig.editorconfig
+C:\dotnet\crm_back_test\EmailService\obj\Debug\net7.0\EmailService.AssemblyInfoInputs.cache
+C:\dotnet\crm_back_test\EmailService\obj\Debug\net7.0\EmailService.AssemblyInfo.cs
+C:\dotnet\crm_back_test\EmailService\obj\Debug\net7.0\EmailService.csproj.CoreCompileInputs.cache
+C:\dotnet\crm_back_test\EmailService\obj\Debug\net7.0\EmailService.dll
+C:\dotnet\crm_back_test\EmailService\obj\Debug\net7.0\refint\EmailService.dll
+C:\dotnet\crm_back_test\EmailService\obj\Debug\net7.0\EmailService.pdb
+C:\dotnet\crm_back_test\EmailService\obj\Debug\net7.0\ref\EmailService.dll
