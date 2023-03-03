@@ -2,6 +2,7 @@ using crm_back_test.Data;
 using crm_back_test.Services.CustomerServices;
 using crm_back_test.Services.NoteServices;
 using crm_back_test.Services.UserServices;
+using crm_back_test.Services.ProjectServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using EmailService;
@@ -37,6 +38,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.AddScoped<INoteService, NoteService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
 
 var app = builder.Build();
 

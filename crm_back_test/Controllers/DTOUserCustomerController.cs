@@ -117,7 +117,7 @@ namespace crm_back_test.Controllers
             return Ok(users);
         }
 
-        [HttpPut]
+        [HttpPut("{customerId}")]
         public async Task<ActionResult<List<User>?>> putCustomer(int customerId, DTOUserCustomer newCustomer)
         {
             var user = new User()

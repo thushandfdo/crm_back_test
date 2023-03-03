@@ -22,9 +22,9 @@ namespace crm_back_test.Services.CustomerServices
 
         public async Task<List<Customer>?> getCustomers()
         {
-            var notes = await _context.Customers.ToListAsync();
+            var customers = await _context.Customers.ToListAsync();
 
-            return notes;
+            return customers;
         }
 
         public async Task<List<Customer>?> postCustomer(Customer newCustomer)

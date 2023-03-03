@@ -55,7 +55,7 @@ namespace crm_back_test.Controllers
             return Ok(users);
         }
 
-        [HttpPut]
+        [HttpPut("{userId}")]
         public async Task<ActionResult<List<User>?>> putUser(int userId, User newUser)
         {
             var users = await _userService.putUser(userId, newUser);

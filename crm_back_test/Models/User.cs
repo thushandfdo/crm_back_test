@@ -11,10 +11,10 @@ namespace crm_back_test.Models
         [Required, Column(TypeName = "nvarchar(20)")]
         public string Type { get; set; } = string.Empty;
 
-        [Required, Column(TypeName = "nvarchar(30)")]
+        [Column(TypeName = "nvarchar(30)")]
         public string Username { get; set; } = string.Empty;
 
-        [Required, Column(TypeName = "nvarchar(30)")]
+        [Column(TypeName = "nvarchar(30)")]
         public string Password { get; set; } = string.Empty;
 
         [Required, Column(TypeName = "nvarchar(50)")]
@@ -29,7 +29,7 @@ namespace crm_back_test.Models
         [Required, Column(TypeName = "nvarchar(30)")]
         public string Email { get; set; } = string.Empty;
 
-        [Required, Column(TypeName = "nvarchar(30)")]
+        [Column(TypeName = "nvarchar(30)")]
         public string ProfilePic { get; set; } = string.Empty;
     }
 }
