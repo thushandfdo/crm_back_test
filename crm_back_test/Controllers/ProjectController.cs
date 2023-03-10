@@ -44,42 +44,42 @@ namespace crm_back_test.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Project>?>> postProject(Project newProject)
+        public async Task<ActionResult<Project?>> postProject(Project newProject)
         {
-            var users = await _projectService.postProject(newProject);
+            var project = await _projectService.postProject(newProject);
 
-            if (users == null)
+            if (project == null)
             {
                 return NotFound("Project is already exist..!");
             }
 
-            return Ok(users);
+            return Ok(project);
         }
 
         [HttpPut("{projectId}")]
-        public async Task<ActionResult<List<Project>?>> putProject(int projectId, Project newProject)
+        public async Task<ActionResult<Project?>> putProject(int projectId, Project newProject)
         {
-            var projects = await _projectService.putProject(projectId, newProject);
+            var project = await _projectService.putProject(projectId, newProject);
 
-            if (projects == null)
+            if (project == null)
             {
                 return NotFound("Project is not found..!");
             }
 
-            return Ok(projects);
+            return Ok(project);
         }
 
         [HttpDelete("{projectId}")]
-        public async Task<ActionResult<List<Project>?>> deleteProject(int projectId)
+        public async Task<ActionResult<Project?>> deleteProject(int projectId)
         {
-            var users = await _projectService.deleteProject(projectId);
+            var project = await _projectService.deleteProject(projectId);
 
-            if (users == null)
+            if (project == null)
             {
                 return NotFound("Project is not found..!");
             }
 
-            return Ok(users);
+            return Ok(project);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace crm_back_test.Services.UserServices
             return notes;
         }
 
-        public async Task<List<User>?> postUser(User newUser)
+        public async Task<User?> postUser(User newUser)
         {
             var user = await _context.Users.Where(user => 
                 user.Username.Equals(newUser.Username) || user.Email.Equals(newUser.Email)
@@ -41,10 +41,10 @@ namespace crm_back_test.Services.UserServices
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
 
-            return await _context.Users.ToListAsync();
+            return await _context.Users.Where(user => user.Email.Equals(newUser.Email)).FirstOrDefaultAsync();
         }
 
-        public async Task<List<User>?> putUser(int userId, User newUser)
+        public async Task<User?> putUser(int userId, User newUser)
         {
             var user = await _context.Users.FindAsync(userId);
 
@@ -64,10 +64,10 @@ namespace crm_back_test.Services.UserServices
 
             await _context.SaveChangesAsync();
 
-            return await _context.Users.ToListAsync();
+            return user;
         }
 
-        public async Task<List<User>?> deleteUser(int userId)
+        public async Task<User?> deleteUser(int userId)
         {
             var user = await _context.Users.FindAsync(userId);
 
@@ -79,7 +79,7 @@ namespace crm_back_test.Services.UserServices
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
-            return await _context.Users.ToListAsync();
+            return user;
         }
     }
 }

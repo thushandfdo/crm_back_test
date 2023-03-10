@@ -43,42 +43,42 @@ namespace crm_back_test.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Customer>?>> postCustomer(Customer newCustomer)
+        public async Task<ActionResult<Customer?>> postCustomer(Customer newCustomer)
         {
-            var customers = await _customerService.postCustomer(newCustomer);
+            var customer = await _customerService.postCustomer(newCustomer);
 
-            if (customers == null)
+            if (customer == null)
             {
                 return NotFound("Customer is already exist..!");
             }
 
-            return Ok(customers);
+            return Ok(customer);
         }
 
         [HttpPut]
-        public async Task<ActionResult<List<Customer>?>> putCustomer(int customerId, Customer newCustomer)
+        public async Task<ActionResult<Customer?>> putCustomer(int customerId, Customer newCustomer)
         {
-            var customers = await _customerService.putCustomer(customerId, newCustomer);
+            var customer = await _customerService.putCustomer(customerId, newCustomer);
 
-            if (customers == null)
+            if (customer == null)
             {
                 return NotFound("Customer is not found..!");
             }
 
-            return Ok(customers);
+            return Ok(customer);
         }
 
         [HttpDelete("{customerId}")]
-        public async Task<ActionResult<List<Customer>?>> deleteCustomer(int customerId)
+        public async Task<ActionResult<Customer?>> deleteCustomer(int customerId)
         {
-            var customers = await _customerService.deleteCustomer(customerId);
+            var customer = await _customerService.deleteCustomer(customerId);
 
-            if (customers == null)
+            if (customer == null)
             {
                 return NotFound("Customer is not found..!");
             }
 
-            return Ok(customers);
+            return Ok(customer);
         }
     }
 }

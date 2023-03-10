@@ -27,7 +27,7 @@ namespace crm_back_test.Services.CustomerServices
             return customers;
         }
 
-        public async Task<List<Customer>?> postCustomer(Customer newCustomer)
+        public async Task<Customer?> postCustomer(Customer newCustomer)
         {
             var customer = await _context.Customers.Where(customer => customer.Company.Equals(newCustomer.Company)).FirstOrDefaultAsync();
 
@@ -39,10 +39,10 @@ namespace crm_back_test.Services.CustomerServices
             _context.Customers.Add(newCustomer);
             await _context.SaveChangesAsync();
 
-            return await _context.Customers.ToListAsync();
+            return await _context.Customers.Where(customer => customer.Company.Equals(newCustomer.Company)).FirstOrDefaultAsync();
         }
 
-        public async Task<List<Customer>?> putCustomer(int customerId, Customer newCustomer)
+        public async Task<Customer?> putCustomer(int customerId, Customer newCustomer)
         {
             var customer = await _context.Customers.FindAsync(customerId);
 
@@ -55,10 +55,10 @@ namespace crm_back_test.Services.CustomerServices
 
             await _context.SaveChangesAsync();
 
-            return await _context.Customers.ToListAsync();
+            return await _context.Customers.FindAsync(customerId);
         }
 
-        public async Task<List<Customer>?> deleteCustomer(int customerId)
+        public async Task<Customer?> deleteCustomer(int customerId)
         {
             var customer = await _context.Customers.FindAsync(customerId);
 
@@ -70,7 +70,7 @@ namespace crm_back_test.Services.CustomerServices
             _context.Customers.Remove(customer);
             await _context.SaveChangesAsync();
 
-            return await _context.Customers.ToListAsync();
+            return customer;
         }
     }
 }

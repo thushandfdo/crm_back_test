@@ -87,7 +87,7 @@ namespace crm_back_test.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<User>?>> postCustomer(DTOUserCustomer newCustomer)
+        public async Task<ActionResult<DTOUserCustomer?>> postCustomer(DTOUserCustomer newCustomer)
         {
             var user = new User()
             {
@@ -101,24 +101,41 @@ namespace crm_back_test.Controllers
                 ProfilePic = newCustomer.ProfilePic
             };
 
-            var users = await _userService.postUser(user);
+            var addedUser = await _userService.postUser(user);
 
-            if (users == null)
-                return NotFound("Customers list is Empty..!");
+            if (addedUser == null)
+                return NotFound("User is already there..!");
 
             var customer = new Customer()
             {
-                UserId = users.Find(x => x.Email == user.Email).UserId,
+                UserId = addedUser.UserId,
                 Company = newCustomer.Company
             };
 
-            var customers = await _customerService.postCustomer(customer);
+            var addedCustomer = await _customerService.postCustomer(customer);
+
+            if (addedCustomer == null)
+                return NotFound("Customer is already there..!");
+
+            var DTOCustomer = new DTOUserCustomer()
+            {
+                UserId = addedUser.UserId,
+                Type = addedUser.Type,
+                Username = addedUser.Username,
+                Password = addedUser.Password,
+                FirstName = addedUser.FirstName,
+                LastName = addedUser.LastName,
+                ContactNo = addedUser.ContactNo,
+                Email = addedUser.Email,
+                ProfilePic = addedUser.ProfilePic,
+                Company = addedCustomer.Company
+            };
             
-            return Ok(users);
+            return Ok(DTOCustomer);
         }
 
         [HttpPut("{customerId}")]
-        public async Task<ActionResult<List<User>?>> putCustomer(int customerId, DTOUserCustomer newCustomer)
+        public async Task<ActionResult<DTOUserCustomer?>> putCustomer(int customerId, DTOUserCustomer newCustomer)
         {
             var user = new User()
             {
@@ -132,9 +149,9 @@ namespace crm_back_test.Controllers
                 ProfilePic = newCustomer.ProfilePic
             };
 
-            var users = await _userService.putUser(customerId, user);
+            var addedUser = await _userService.putUser(customerId, user);
 
-            if (users == null)
+            if (addedUser == null)
                 return NotFound("Customers list is Empty..!");
 
             var customer = new Customer()
@@ -143,22 +160,56 @@ namespace crm_back_test.Controllers
                 Company = newCustomer.Company
             };
 
-            var customers = await _customerService.putCustomer(customerId, customer);
-            
-            return Ok(users);
+            var addedCustomer = await _customerService.putCustomer(customerId, customer);
+
+            if (addedCustomer == null)
+                return NotFound("Customers list is Empty..!");
+
+            var DTOCustomer = new DTOUserCustomer()
+            {
+                UserId = addedUser.UserId,
+                Type = addedUser.Type,
+                Username = addedUser.Username,
+                Password = addedUser.Password,
+                FirstName = addedUser.FirstName,
+                LastName = addedUser.LastName,
+                ContactNo = addedUser.ContactNo,
+                Email = addedUser.Email,
+                ProfilePic = addedUser.ProfilePic,
+                Company = addedCustomer.Company
+            };
+
+            return Ok(DTOCustomer);
         }
 
         [HttpDelete("{customerId}")]
-        public async Task<ActionResult<List<User>?>> deleteCustomer(int customerId)
+        public async Task<ActionResult<DTOUserCustomer?>> deleteCustomer(int customerId)
         {
-            var customers = await _customerService.deleteCustomer(customerId);
+            var customer = await _customerService.deleteCustomer(customerId);
 
-            if (customers == null)
+            if (customer == null)
                 return NotFound("Customer not Found...!");
 
-            var users = await _userService.deleteUser(customerId);
+            var user = await _userService.deleteUser(customerId);
 
-            return Ok(users);
+            if (user == null)
+                return NotFound("User not Found...!");
+
+            var DTOCustomer = new DTOUserCustomer()
+            {
+                UserId = user.UserId,
+                Type = user.Type,
+                Username = user.Username,
+                Password = user.Password,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                ContactNo = user.ContactNo,
+                Email = user.Email,
+                ProfilePic = user.ProfilePic,
+                Company = customer.Company
+            };
+
+            return Ok(DTOCustomer);
         }
     }
 }

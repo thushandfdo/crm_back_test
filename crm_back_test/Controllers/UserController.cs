@@ -43,42 +43,42 @@ namespace crm_back_test.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<User>?>> postUser(User newUser)
+        public async Task<ActionResult<User?>> postUser(User newUser)
         {
-            var users = await _userService.postUser(newUser);
+            var user = await _userService.postUser(newUser);
 
-            if (users == null)
+            if (user == null)
             {
                 return NotFound("User is already exist..!");
             }
 
-            return Ok(users);
+            return Ok(user);
         }
 
         [HttpPut("{userId}")]
-        public async Task<ActionResult<List<User>?>> putUser(int userId, User newUser)
+        public async Task<ActionResult<User?>> putUser(int userId, User newUser)
         {
-            var users = await _userService.putUser(userId, newUser);
+            var user = await _userService.putUser(userId, newUser);
 
-            if (users == null)
+            if (user == null)
             {
                 return NotFound("User is not found..!");
             }
 
-            return Ok(users);
+            return Ok(user);
         }
 
         [HttpDelete("{userId}")]
-        public async Task<ActionResult<List<User>?>> deleteUser(int userId)
+        public async Task<ActionResult<User?>> deleteUser(int userId)
         {
-            var users = await _userService.deleteUser(userId);
+            var user = await _userService.deleteUser(userId);
 
-            if (users == null)
+            if (user == null)
             {
                 return NotFound("User is not found..!");
             }
 
-            return Ok(users);
+            return Ok(user);
         }
     }
 }
