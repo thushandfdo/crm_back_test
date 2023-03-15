@@ -1,12 +1,18 @@
 ﻿using crm_back_test.Models;
 using crm_back_test.Services.UserServices;
+using EmailService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 namespace crm_back_test.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -79,6 +85,19 @@ namespace crm_back_test.Controllers
             }
 
             return Ok(user);
+        }
+
+        [HttpPost("Email")]
+        public async Task<IActionResult> PostAsync([FromForm] IFormFile image)
+        {
+            if (image == null)
+            {
+                return BadRequest("No file selected");
+            }
+
+            
+
+            return Ok("File uploaded successfully");
         }
     }
 }

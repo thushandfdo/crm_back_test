@@ -7,12 +7,12 @@ namespace crm_back_test.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
-        public DbSet<Note> Notes { get; set; }
-
         public DbSet<Customer> Customers { get; set; }
 
         public DbSet<User> Users { get; set; }
 
         public DbSet<Project> Projects { get; set; }
+
+        public DbSet<LoginUser> LoginUsers { get; set; }
     }
 }

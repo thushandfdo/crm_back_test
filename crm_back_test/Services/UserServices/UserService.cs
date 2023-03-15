@@ -1,5 +1,7 @@
 ﻿using crm_back_test.Data;
+using crm_back_test.DTOs;
 using crm_back_test.Models;
+using crm_back_test.Services.LoginUserServices;
 using Microsoft.EntityFrameworkCore;
 
 namespace crm_back_test.Services.UserServices
@@ -7,10 +9,12 @@ namespace crm_back_test.Services.UserServices
     public class UserService : IUserService
     {
         private readonly DataContext _context;
+        private readonly ILoginUserService _loginUserService;
 
-        public UserService(DataContext context)
+        public UserService(DataContext context, ILoginUserService loginUserService)
         {
             _context = context;
+            _loginUserService = loginUserService;
         }
 
         public async Task<User?> getUser(int userId)
@@ -41,6 +45,14 @@ namespace crm_back_test.Services.UserServices
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
 
+            var newDTOuser = new DTOUser()
+            {
+                Username = newUser.Username,
+                Password = newUser.Password
+            };
+
+            await _loginUserService.postLoginUser(newDTOuser);
+
             return await _context.Users.Where(user => user.Email.Equals(newUser.Email)).FirstOrDefaultAsync();
         }
 
@@ -63,6 +75,14 @@ namespace crm_back_test.Services.UserServices
             user.ProfilePic = (newUser.ProfilePic == "") ? user.ProfilePic : newUser.ProfilePic;
 
             await _context.SaveChangesAsync();
+
+            var newDTOuser = new DTOUser()
+            {
+                Username = newUser.Username,
+                Password = newUser.Password
+            };
+
+            await _loginUserService.putLoginUser(userId, newDTOuser);
 
             return user;
         }

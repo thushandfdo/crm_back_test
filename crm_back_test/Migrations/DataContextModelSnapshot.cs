@@ -36,29 +36,20 @@ namespace crm_back_test.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("crm_back_test.Models.Note", b =>
+            modelBuilder.Entity("crm_back_test.Models.LoginUser", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)");
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("Details")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(MAX)");
+                    b.HasKey("UserId");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(30)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Notes");
+                    b.ToTable("LoginUsers");
                 });
 
             modelBuilder.Entity("crm_back_test.Models.Project", b =>
@@ -154,6 +145,17 @@ namespace crm_back_test.Migrations
                 });
 
             modelBuilder.Entity("crm_back_test.Models.Customer", b =>
+                {
+                    b.HasOne("crm_back_test.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("crm_back_test.Models.LoginUser", b =>
                 {
                     b.HasOne("crm_back_test.Models.User", "User")
                         .WithMany()

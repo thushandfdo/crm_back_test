@@ -2,6 +2,7 @@
 using crm_back_test.Models;
 using crm_back_test.Services.CustomerServices;
 using crm_back_test.Services.UserServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

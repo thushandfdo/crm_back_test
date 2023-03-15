@@ -1,7 +1,9 @@
 ﻿using crm_back_test.Models;
 using crm_back_test.Services.CustomerServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace crm_back_test.Controllers
 {
@@ -55,7 +57,7 @@ namespace crm_back_test.Controllers
             return Ok(customer);
         }
 
-        [HttpPut]
+        [HttpPut("{customerId}")]
         public async Task<ActionResult<Customer?>> putCustomer(int customerId, Customer newCustomer)
         {
             var customer = await _customerService.putCustomer(customerId, newCustomer);
