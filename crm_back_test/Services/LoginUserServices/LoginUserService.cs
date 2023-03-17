@@ -1,6 +1,7 @@
 ﻿using crm_back_test.Data;
 using crm_back_test.DTOs;
 using crm_back_test.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -126,21 +127,53 @@ namespace crm_back_test.Services.LoginUserServices
             return token;
         }
 
-        public async Task<User?> getTokenData()
+        public async Task<DTOLoginUser?> getTokenData()
         {
-            string userName = string.Empty;
-            string role = string.Empty;
-            string expDate = string.Empty;
+            var loginUser = new DTOLoginUser();
 
             if (_httpContextAccessor != null)
             {
-                userName = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
-                role = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Role);
-                expDate = _httpContextAccessor.HttpContext.User.FindFirstValue("exp");
+                loginUser.Username = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+                loginUser.Type = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Role);
+                loginUser.ExpireDate = _httpContextAccessor.HttpContext.User.FindFirstValue("exp");
             }
 
-            return await _context.Users.Where(user => user.Username.Equals(userName)).FirstOrDefaultAsync();
+            var user = await _context.Users.Where(user => user.Username.Equals(loginUser.Username)).FirstOrDefaultAsync();
+
+            var filePath = $"./ProfilePics/{user?.ProfilePic}";
+            var fileExtension = Path.GetExtension(filePath);
+
+            loginUser.FirstName = user.FirstName;
+            loginUser.LastName = user.LastName;
+
+            if (File.Exists(filePath))
+            {
+                //var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                //loginUser.ProfilePic = new FileStreamResult(fileStream, $"image/{fileExtension[1..]}");
+
+                var fileBytes = File.ReadAllBytes(filePath);
+                loginUser.ProfilePic = new FileContentResult(fileBytes, "image/png");
+            }
+
+            return loginUser;
         }
+
+        //public async Task<ActionResult<IFormFile?>> getProfilePic(string username)
+        //{
+        //    var user = await _context.Users.Where(user => user.Username.Equals(username)).FirstOrDefaultAsync();
+
+        //    var filePath = $"./ProfilePics/{user?.ProfilePic}";
+        //    var fileExtension = Path.GetExtension(filePath);
+
+        //    if (!File.Exists(filePath))
+        //    {
+        //        return null;
+        //    }
+
+        //    var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+
+        //    return new FileStreamResult(fileStream, $"image/{fileExtension[1..]}");
+        //}
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {

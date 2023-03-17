@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using MimeKit;
 
 namespace crm_back_test.Controllers
 {
@@ -88,16 +89,40 @@ namespace crm_back_test.Controllers
         }
 
         [HttpPost("Email")]
-        public async Task<IActionResult> PostAsync([FromForm] IFormFile image)
+        public async Task<ActionResult<IFormFile>> PostAsync(IFormFile image)
         {
             if (image == null)
             {
                 return BadRequest("No file selected");
             }
 
+            byte[] fileBytes;
             
+            using (var ms = new MemoryStream())
+            {
+                image.CopyTo(ms);
+                fileBytes = ms.ToArray();
+            }
 
-            return Ok("File uploaded successfully");
+            var filePath = "./ProfilePics/image.png";
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await stream.WriteAsync(fileBytes);
+            }
+
+            //
+
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound("Not found");
+            }
+
+            var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+
+            var fileExtension = Path.GetExtension(filePath);
+
+            return new FileStreamResult(fileStream, $"image/{fileExtension[1..]}");
         }
     }
 }

@@ -86,7 +86,7 @@ namespace crm_back_test.Controllers
         }
 
         [HttpGet, Authorize]
-        public async Task<ActionResult<User>> GetTokenData()
+        public async Task<ActionResult<DTOLoginUser>> GetTokenData()
         {
             var user = await _loginUserService.getTokenData();
 

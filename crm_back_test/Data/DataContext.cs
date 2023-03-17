@@ -14,5 +14,9 @@ namespace crm_back_test.Data
         public DbSet<Project> Projects { get; set; }
 
         public DbSet<LoginUser> LoginUsers { get; set; }
+
+        public DbSet<Sale> Sales { get; set; }
+
+        public DbSet<Enduser> Endusers { get; set; }
     }
 }
