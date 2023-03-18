@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using crm_back_test.Services.EnduserServices;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +33,11 @@ builder.Services.Configure<FormOptions>(o => {
     o.MemoryBufferThreshold = int.MaxValue;
 });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpContextAccessor();
@@ -69,7 +74,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddScoped<IEnduserService, EnduserService>();
 builder.Services.AddScoped<ILoginUserService, LoginUserService>();
-builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<ICustomerService, crm_back_test.Services.CustomerServices.CustomerService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 
@@ -87,6 +92,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// This is a public sample test API key.
+// Don’t submit any personally identifiable information in requests made with this key.
+// Sign in to see your own test API key embedded in code samples.
+StripeConfiguration.ApiKey = "sk_test_51MUsoZAohmapaowNwXOofY6UIN4vjZTOzYUFfXo2fFlqUubK7NeTQfK82lWusMoE3SiZxQLDsWt8nkAt85yFp0TO00vtbW04Lb";
 
 app.UseHttpsRedirection();
 

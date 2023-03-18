@@ -360,3 +360,4 @@ C:\dotnet\crm_back_test\crm_back_test\bin\Debug\net7.0\runtimes\unix\lib\net6.0\
 C:\dotnet\crm_back_test\crm_back_test\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 C:\dotnet\crm_back_test\crm_back_test\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\dotnet\crm_back_test\crm_back_test\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\dotnet\crm_back_test\crm_back_test\bin\Debug\net7.0\Stripe.net.dll

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "j7iplu69GPqmLNJQSQGMlj77+ba995o5aqqbl+DHjKCAyFs+8NDGMzM24Xic6cflcJVPGevp9Zyl13HnB+8CZA==",
+  "dgSpecHash": "7dc+E9zTHdGU0/BqJrww32ftgYzkXNUdkso3fapfewaEOvW/5u7+gOep6MCeUj4Am1cC+FneDCEW/n+KQ6NfQg==",
   "success": true,
   "projectFilePath": "C:\\dotnet\\crm_back_test\\crm_back_test\\crm_back_test.csproj",
   "expectedPackageFiles": [
@@ -109,6 +109,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\thush\\.nuget\\packages\\scrutor\\3.3.0\\scrutor.3.3.0.nupkg.sha512",
+    "C:\\Users\\thush\\.nuget\\packages\\stripe.net\\41.10.0\\stripe.net.41.10.0.nupkg.sha512",
     "C:\\Users\\thush\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "C:\\Users\\thush\\.nuget\\packages\\swashbuckle.aspnetcore.filters\\7.0.6\\swashbuckle.aspnetcore.filters.7.0.6.nupkg.sha512",
     "C:\\Users\\thush\\.nuget\\packages\\swashbuckle.aspnetcore.filters.abstractions\\7.0.6\\swashbuckle.aspnetcore.filters.abstractions.7.0.6.nupkg.sha512",
