@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace crm_back_test.Models
 {
@@ -29,11 +30,13 @@ namespace crm_back_test.Models
         [ForeignKey("Customer")]
         public int CustomerId { get; set; }
 
+        [JsonIgnore]
         public Customer? Customer { get; set; }
 
         [ForeignKey("User")]
         public int TechLeadId { get; set; }
 
+        [JsonIgnore]
         public User? TechLead { get; set; }
     }
 }

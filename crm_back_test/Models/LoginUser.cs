@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace crm_back_test.Models
 {
@@ -8,6 +9,7 @@ namespace crm_back_test.Models
         [Key, ForeignKey("User")]
         public int UserId { get; set; }
 
+        [JsonIgnore]
         public User? User { get; set; }
 
         public byte[]? PasswordHash { get; set; }

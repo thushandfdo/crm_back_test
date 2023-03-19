@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text.Json;
 using Stripe;
+using crm_back_test.Models;
+using crm_back_test.Services.PaymentServices;
 
 namespace crm_back_test.Controllers
 {
@@ -10,6 +12,13 @@ namespace crm_back_test.Controllers
     [ApiController]
     public class PaymentController : ControllerBase
     {
+        private readonly IPaymentService _paymentService;
+
+        public PaymentController(IPaymentService paymentService)
+        {
+            _paymentService = paymentService;
+        }
+
         public class Item
         {
             [JsonProperty("id")]
@@ -22,21 +31,13 @@ namespace crm_back_test.Controllers
             public Item[] Items { get; set; }
         }
 
-        private int CalculateOrderAmount(Item[] items)
-        {
-            // Replace this constant with a calculation of the order's amount
-            // Calculate the order total on the server to prevent
-            // people from directly manipulating the amount on the client
-            return 5000;
-        }
-
-        [HttpPost]
+        [HttpPost("Stripe")]
         public ActionResult Create(PaymentIntentCreateRequest request)
         {
             var paymentIntentService = new PaymentIntentService();
             var paymentIntent = paymentIntentService.Create(new PaymentIntentCreateOptions
             {
-                Amount = CalculateOrderAmount(request.Items),
+                Amount = _paymentService.CalculateOrderAmount(request.Items),
                 Currency = "usd",
                 AutomaticPaymentMethods = new PaymentIntentAutomaticPaymentMethodsOptions
                 {
@@ -52,6 +53,45 @@ namespace crm_back_test.Controllers
 
             // Return the JSON response.
             return Content(jsonResponse, "application/json");
+        }
+
+        [HttpGet("{paymentId}")]
+        public async Task<ActionResult<Payment?>> getPayment(int paymentId)
+        {
+            var payment = await _paymentService.getPayment(paymentId);
+
+            if (payment == null)
+            {
+                return NotFound("Payment does not exist");
+            }
+
+            return Ok(payment);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<Payment>?>> getPayments()
+        {
+            var payments = await _paymentService.getPayments();
+
+            if (payments == null)
+            {
+                return NotFound("Payments list is Empty..!");
+            }
+
+            return Ok(payments);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Payment?>> postPayment(Payment newPayment)
+        {
+            var payment = await _paymentService.postPayment(newPayment);
+
+            if (payment == null)
+            {
+                return NotFound("Payment is already exist..!");
+            }
+
+            return Ok(payment);
         }
     }
 }

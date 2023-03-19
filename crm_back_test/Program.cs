@@ -14,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using crm_back_test.Services.EnduserServices;
 using Stripe;
+using crm_back_test.Services.PaymentServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,10 +34,11 @@ builder.Services.Configure<FormOptions>(o => {
     o.MemoryBufferThreshold = int.MaxValue;
 });
 
-builder.Services.AddControllers().AddJsonOptions(options =>
-{
-    options.JsonSerializerOptions.PropertyNamingPolicy = null;
-});
+builder.Services.AddControllers();
+//    .AddJsonOptions(options =>
+//{
+//    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+//});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -72,6 +74,7 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("default"))
 );
 
+builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IEnduserService, EnduserService>();
 builder.Services.AddScoped<ILoginUserService, LoginUserService>();
 builder.Services.AddScoped<ICustomerService, crm_back_test.Services.CustomerServices.CustomerService>();

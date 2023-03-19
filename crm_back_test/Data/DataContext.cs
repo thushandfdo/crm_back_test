@@ -18,5 +18,7 @@ namespace crm_back_test.Data
         public DbSet<Sale> Sales { get; set; }
 
         public DbSet<Enduser> Endusers { get; set; }
+
+        public DbSet<Payment> Payments { get; set; }
     }
 }
